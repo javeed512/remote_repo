@@ -1,0 +1,43 @@
+Spring Cloud Configuration:
+========================
+
+Config Server
+-------------------
+1. Create Spring Boot Project with  i. spring web ii. server config iii.actuator dependencies with some unique port no ex: 8585
+2. Create a new folder and make it as local git repo then create  either properties or yml file in it.
+3. In Spring Project go to main and add annotation @EnableConfigServer
+4. Import  file from local repo using  url in  default properties file of spring boot project
+
+Config Client
+--------------------
+1. Create Spring Boot Project with dependencies i. spring web ii. actuator iii.config client
+2. Confiure or import Spring Server access into Spring Client in application.properties or yml file
+#connect to local repo
+spring.cloud.config.server.git.uri= D:\\mylocalgit
+
+#connect to remote repo
+#spring.cloud.config.server.git.uri= https://gitlab.com/Javeed512/testrepo.git
+
+#if repo is private
+#spring.cloud.config.server.git.username= username
+#spring.cloud.config.server.git.password= password
+
+#server.port = 8585
+
+Note: For Remote Repo create a new repository in github or gitlab and add it to the local repo and push file to master branch
+
+
+How to import config server in local apps or config clients
+
+Note: use any spring boot app and write below config to import server but ensure that current project
+should have config client dependency
+
+spring.config.import= configserver:
+spring.cloud.config.uri= http://localhost:8585
+management.endpoints.web.exposure.include= *
+
+server.port = 8282
+
+
+
+
